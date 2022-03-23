@@ -467,6 +467,24 @@ expression()
 	  case IDENTIFIER:
 	       name = tok.token;
 	       line = tok.line;
+	if (0 == strcmp(name, "XXXXX")) {
+	  nexttoken();
+	  if (tok.type=='(') {
+	    nexttoken();
+	      if (tok.type == IDENTIFIER) {
+	        name = tok.token;
+		line = tok.line;
+		nexttoken();
+		if (tok.type == ')' ) {
+		  nexttoken();
+		  if (tok.type == '(') {
+                    call(name,line);
+                    parens_lev++;
+		  }
+		}
+	      }
+	  }
+	}
 	       nexttoken();
 	       if (tok.type == '(') {
 		    call(name, line);
